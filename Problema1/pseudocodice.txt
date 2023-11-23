@@ -1,0 +1,31 @@
+bar è un vettore di record (Genere, Birra)
+
+algorithm beer_change(bar) -> bar
+    N <- Size of bar
+    AUX[1:N] inizialmente a 0
+    m <- 1
+    f <- 2
+    for i = 1 to N do
+        if (bar[i].Genere = M and bar[i].Birra = A)
+            AUX[m] <- i
+            m <- m + 2
+        if (bar[i].Genere = F and bar[i].Birra = B)
+            AUX[f] <- i
+            f <- f + 2
+    k <- 1
+    while AUX[k] != 0:
+        if (AUX[k + 1] < AUX [k])
+            scambia AUX[k + 1] con AUX[k]
+        
+        u <- AUX[k]
+        v <- AUX[k + 1] - 1
+    
+        while u < AUX[k + 1]
+            scambia bar[AUX[u]].Birra con bar[AUX[u + 1]].Birra
+            incremento u
+        while v > AUX[k]
+            scambia bar[AUX[v]].Birra con bar[AUX[v - 1]].Birra
+            decremento v
+        incremento k di 2
+    
+    return bar 
