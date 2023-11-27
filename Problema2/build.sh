@@ -1,6 +1,6 @@
 #!/bin/zsh
 #
 #
-gcc -o main create_tree.c -lm
+gcc -o main algoritmo_tetris.c -lm
 ./main
 kitten icat binary_tree.png

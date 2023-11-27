@@ -1,9 +1,9 @@
+#ifdef CREATE_TREE_IMPL
 #include <math.h>
-#include <stdio.h>
-#include <stdlib.h>
 
 typedef struct node {
     int data;
+    int hight;
     struct node *sx;
     struct node *dx;
 } node;
@@ -18,7 +18,15 @@ node *alloc_node(int val) {
     nd->sx = NULL;
     nd->dx = NULL;
     nd->data = val;
+    nd->hight = 0;
     return nd;
+}
+
+tree *alloc_tree() {
+    tree *t = malloc(sizeof(tree));
+    t->n_nodes = 0;
+    t->root = NULL;
+    return t;
 }
 
 void create_tree_p(node *root, int i, int n) {
@@ -83,15 +91,4 @@ void visualizeBinaryTree(tree *t, const char *filename) {
              filename);
     system(command);
 }
-
-int main() {
-    // Create a simple binary tree
-    int n = 5;
-    tree t = {0, NULL};
-    create_tree(&t, n);
-
-    // Visualize the binary tree
-    visualizeBinaryTree(&t, "binary_tree");
-
-    return 0;
-}
+#endif
