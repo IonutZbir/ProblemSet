@@ -89,7 +89,7 @@ int main() {
     mosse->item[3].width = 1;
     mosse->item[3].hight = 5;
 
-    mosse->item[4].x = 5; // 4
+    mosse->item[4].x = 4; // 4
     mosse->item[4].width = 2;
     mosse->item[4].hight = 3;
 
