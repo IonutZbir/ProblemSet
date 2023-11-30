@@ -4,7 +4,7 @@ def tetris(moves: list, n: int, m: int):
     xs = [0] * n
     max_hs = [0] * sqrt_n
     plain = [True] * sqrt_n
-    for i, (x, w, h) in enumerate(moves):
+    for l, (x, w, h) in enumerate(moves):
         #print(i, x, w, h)
         x = x - 1
         if x == 0 : z = x + w 
@@ -17,6 +17,7 @@ def tetris(moves: list, n: int, m: int):
             max_hs[x_start] = max_hs[x_start] + h
             plain[x_start] = True
             k = max_hs[x_start]
+
         elif x_start == x_end:
             k = max(xs[x:z+1])
             k += h
@@ -24,26 +25,44 @@ def tetris(moves: list, n: int, m: int):
                 xs[j] = k 
             if max_hs[x_start] < k: max_hs[x_start] = k
             plain[x_start] = False
-        else:
-            plain[x_start] = plain[x_end] = False
-            for i in xs[x - 1: x_start * sqrt_n +1]:
-                if i > k: k = i
-            for i in max_hs[x_start : x_end ]:
-                if i > k: k = i
-            for i in xs[x_end * sqrt_n - 1: z + 1]:
-                if i > k: k = i
-            k += h
-            for i in range(len(xs[x: x_start * sqrt_n + 1])):
-                xs[x + i] = k 
-            for i in range(len(max_hs[x_start + 1: x_end - 1])):
-                max_hs[i + x_start + 1] = k 
-                plain[i + x_start + 1] = True
-            for i in range(len(xs[x_end * sqrt_n - 1: z +1])):
-                xs[(x_end * sqrt_n) + i - 1] = k 
 
-        if k > m: return i + 1
+        else:
+            if plain[x_start] == True : k = max_hs[x_start]
+            if plain[x_start] == True and k < max_hs[x_end]  : k = max_hs[x_end]
+            
+            plain[x_start] = plain[x_end] = False
+            i = x
+            while i < ((x_start + 1) * sqrt_n):
+                if xs[i] > k : k = xs[i]
+                i += 1
+            i = x_start + 1
+            while i < x_end:
+                if max_hs[i] > k : k = max_hs[i]
+                i += 1
+            i = x_end * sqrt_n 
+            while i <= z:
+                if xs[i] > k : k = xs[i]
+                i += 1
+            k += h
+
+            i = x
+            while i < ((x_start + 1) * sqrt_n):
+                xs[i] = k
+                i += 1
+            i = x_start + 1
+            while i < x_end:
+                max_hs[i] = k
+                plain [i] = True
+                i += 1
+            i = x_end * sqrt_n 
+            while i <= z:
+                xs[i] = k
+                i += 1
+            
+
+        if k > m: return l + 1
     
     return -1
 
 
-print(tetris([(1,  3, 12), (6, 3, 3), (2, 5, 2), (8, 1, 5), (4, 2, 1), (2, 2, 0), (4, 3, 7)], 8, 16))
+print(tetris([(1,  3, 12), (6, 3, 3), (2, 5, 2), (8, 1, 5), (4, 2, 3), (2, 2, 0), (4, 3, 7)], 8, 16))
