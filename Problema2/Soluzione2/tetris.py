@@ -4,64 +4,79 @@ def tetris(moves: list, n: int, m: int):
     xs = [0] * n
     max_hs = [0] * sqrt_n
     plain = [True] * sqrt_n
-    for l, (x, w, h) in enumerate(moves):
+    for l, (x, w, h) in enumerate(moves) :
         #print(i, x, w, h)
         x = x - 1
-        if x == 0 : z = x + w 
-        else: z = x + w -1
+        z = x + w - 1
         x_start = x // sqrt_n # chunck iniziale
-        x_end = (z - 0.001) // sqrt_n # chunk finale
-        x_end = int(x_end)
+        x_end = (z) // sqrt_n # chunk finale
         k = 0
-        if x_start == x_end and w == sqrt_n:
+        if x_start == x_end and w == sqrt_n :
             max_hs[x_start] = max_hs[x_start] + h
             plain[x_start] = True
             k = max_hs[x_start]
 
-        elif x_start == x_end:
+        elif x_start == x_end :
             k = max(xs[x:z+1])
             k += h
-            for j in range(x, z + 1): # O(sqrt_n)
+            for j in range(x, z + 1) : # O(sqrt_n)
                 xs[j] = k 
-            if max_hs[x_start] < k: max_hs[x_start] = k
+            if max_hs[x_start] < k : max_hs[x_start] = k
             plain[x_start] = False
 
         else:
-            if plain[x_start] == True : k = max_hs[x_start]
-            if plain[x_start] == True and k < max_hs[x_end]  : k = max_hs[x_end]
-            
-            plain[x_start] = plain[x_end] = False
-            i = x
-            while i < ((x_start + 1) * sqrt_n):
-                if xs[i] > k : k = xs[i]
-                i += 1
+            if plain[x_start] == True :
+                k = max_hs[x_start]
+            else:
+                i = x
+                while i < ((x_start + 1) * sqrt_n) :
+                    if xs[i] > k :
+                        k = xs[i]
+                    i += 1
+
             i = x_start + 1
-            while i < x_end:
+            while i < x_end :
                 if max_hs[i] > k : k = max_hs[i]
                 i += 1
-            i = x_end * sqrt_n 
-            while i <= z:
-                if xs[i] > k : k = xs[i]
-                i += 1
+
+            if plain[x_end] == True and k < max_hs[x_end] :
+                k = max_hs[x_end]
+            else:
+                i = x_end * sqrt_n 
+
+                while i <= z:
+                    if xs[i] > k :
+                        k = xs[i]
+                    i += 1
+
             k += h
 
             i = x
-            while i < ((x_start + 1) * sqrt_n):
+
+            while i < ((x_start + 1) * sqrt_n) :
                 xs[i] = k
+                if xs[i] > max_hs[x_start] :
+                    max_hs[x_start] = xs[i]
                 i += 1
+
             i = x_start + 1
-            while i < x_end:
+            while i < x_end :
                 max_hs[i] = k
                 plain [i] = True
                 i += 1
+
             i = x_end * sqrt_n 
-            while i <= z:
+            while i <= z :
                 xs[i] = k
+                if xs[i] > max_hs[x_end] :
+                    max_hs[x_end] = xs[i]
                 i += 1
-            
+
+            plain[x_start] = plain[x_end] = False
+
 
         if k > m: return l + 1
-    
+
     return -1
 
 
