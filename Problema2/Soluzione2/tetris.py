@@ -1,5 +1,5 @@
 from math import sqrt, ceil
-def tetris(moves: list, n: int, m: int):
+def tetris(moves: list, n: int, m: int) -> int:
     sqrt_n = ceil(sqrt(n))
     xs = [0] * n
     max_hs = [0] * sqrt_n
