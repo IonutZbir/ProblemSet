@@ -2,5 +2,94 @@
 
 \subsection{Definizione dei sottoproblemi}
 
-Abbiamo notato che ponendo la pedina in una determinata posizione $(i,\ j)$
-della scacchiera (che vediamo come una matrice $n \times 3$).
+Per la risoluzione del problema, definiamo i sottoproblemi come segue: per ogni posizione $(i,\ j)$ all'interno di una scacchiera, 
+considerata come una matrice di dimensioni $n \times 3$, cerchiamo di determinare lo score massimo che possiamo ottenere posizionando 
+una pedina in quella specifica casella.
+\newline
+
+In altre parole, per ogni cella della scacchiera rappresentata dalle coordinate $(i,\ j)$, vogliamo calcolare 
+il punteggio massimo che possiamo ottenere posizionando una pedina in quella cella, tenendo conto delle possibili pedine 
+già posizionate in altre celle della scacchiera. Questo processo di calcolo del punteggio massimo per ogni cella 
+costituisce il nucleo dei sottoproblemi che affronteremo nell'algoritmo di programmazione dinamica.
+
+\begin{center}
+    $OPT[i,\ j]$ \bf{è lo score massimo posizionando la pedina nella casella} $(i,\ j)$.
+\end{center}
+
+\subsubsection*{Struttura dati}
+
+Inizialmente abbiamo concepito $OPT$ come una matrice di dimensioni $n \times 3$, dove ogni posizione rappresentava una cella 
+della scacchiera e conteneva il massimo punteggio ottenibile posizionando una pedina in quella cella. 
+Tuttavia, nel processo di combinare i vari sottoproblemi, abbiamo riconosciuto la necessità di due ulteriori vettori, 
+potenzialmente aggiuntivi di 2 righe rispetto alla matrice iniziale:
+
+\begin{itemize}
+    \item $OPT_{COMB}[1:n]$: Questo array contiene i valori "combinati" (vedere paragrafo successivo) delle colonne della matrice $OPT$. Ogni elemento $OPT_{COMB}[i]$ rappresenta il risultato ottenuto da una specifica casistica della formula di Bellman, applicata alla $i-esima$ colonna della matrice $OPT$.
+    \item $OPT_{MAX}[1:n]$: Questo array memorizza il massimo tra i tre valori della $i-esima$ colonna di $OPT$ e il valore corrispondente di $OPT_{COMB}$. In altre parole, per ogni indice $i$, $OPT_{MAX}[i]$ rappresenta il massimo tra i punteggi della $i-esima$ colonna di $OPT$ e il valore combinato della stessa colonna rappresentato da $OPT_{COMB}[i]$.
+\end{itemize}
+
+In sintesi, questi due vettori aggiuntivi, $OPT_{COMB}$ e $OPT_{MAX}$, sono essenziali per gestire in modo efficiente i punteggi dei 
+sottoproblemi e per calcolare il punteggio massimo complessivo in ciascun passaggio dell'algoritmo.
+
+\subsubsection*{Casistiche}
+
+\setchessboard{
+    boardfontsize=20pt, % Set the size of the chessboard pieces
+    showmover=false, % Hide the mover symbol
+    maxfield=c3, % Set the dimensions of the chessboard
+    boardfontencoding=LSBC4,
+    setfontcolors,
+    showmover=false
+}
+
+\begin{enumerate}
+    \item{
+        \chessboard[
+            zero=false, % numbering starts at zero
+            labelbottomformat=\arabic{filelabel},
+            setpieces={pc3, Pc1},
+        ]
+        % descrizione
+    }
+
+    \item{
+        \chessboard[
+            zero=false, % numbering starts at zero
+            labelbottomformat=\arabic{filelabel},
+        ]
+        % descrizione
+    }
+
+    \item{
+        \chessboard[
+            zero=false, % numbering starts at zero
+            labelbottomformat=\arabic{filelabel},
+        ]
+        % descrizione
+    }
+
+    \item{
+        \chessboard[
+            zero=false, % numbering starts at zero
+            labelbottomformat=\arabic{filelabel},
+        ]
+        % descrizione
+    }
+
+    \item{
+        \chessboard[
+            zero=false, % numbering starts at zero
+            labelbottomformat=\arabic{filelabel},
+        ]
+        % descrizione
+    }
+
+    \item{
+        \chessboard[
+            zero=false, % numbering starts at zero
+            labelbottomformat=\arabic{filelabel},
+        ]
+        % descrizione
+    }
+\end{enumerate}
+
