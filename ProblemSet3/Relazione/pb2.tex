@@ -24,14 +24,20 @@ Tuttavia, nel processo di combinare i vari sottoproblemi, abbiamo riconosciuto l
 potenzialmente aggiuntivi di 2 righe rispetto alla matrice iniziale:
 
 \begin{itemize}
-    \item $OPT_{COMB}[1:n]$: Questo array contiene i valori "combinati" (vedere paragrafo successivo) delle colonne della matrice $OPT$. Ogni elemento $OPT_{COMB}[i]$ rappresenta il risultato ottenuto da una specifica casistica della formula di Bellman, applicata alla $i-esima$ colonna della matrice $OPT$.
-    \item $OPT_{MAX}[1:n]$: Questo array memorizza il massimo tra i tre valori della $i-esima$ colonna di $OPT$ e il valore corrispondente di $OPT_{COMB}$. In altre parole, per ogni indice $i$, $OPT_{MAX}[i]$ rappresenta il massimo tra i punteggi della $i-esima$ colonna di $OPT$ e il valore combinato della stessa colonna rappresentato da $OPT_{COMB}[i]$.
+    \item $OPT_{COMB}[1:n]$: Questo array contiene i valori \textit{combinati} (vedere paragrafo successivo) 
+    delle colonne della matrice $OPT$. Ogni elemento $OPT_{COMB}[j]$ rappresenta il
+    risultato ottenuto da una specifica casistica della formula di Bellman,
+    applicata alla $j-esima$ colonna della matrice $OPT$.
+    \item $OPT_{MAX}[1:n]$: Questo array memorizza il massimo tra i tre valori della $j-esima$
+    colonna di $OPT$ e il valore corrispondente di $OPT_{COMB}$. In altre parole,
+    per ogni indice $j$, $OPT_{MAX}[j]$ rappresenta il massimo tra i punteggi della $j-esima$
+    colonna di $OPT$ e il valore combinato della stessa colonna rappresentato da $OPT_{COMB}[j]$.
 \end{itemize}
 
 In sintesi, questi due vettori aggiuntivi, $OPT_{COMB}$ e $OPT_{MAX}$, sono essenziali per gestire in modo efficiente i punteggi dei 
 sottoproblemi e per calcolare il punteggio massimo complessivo in ciascun passaggio dell'algoritmo.
 
-\subsubsection*{Casistiche}
+\subsection{Casistiche}
 
 \setchessboard{
     boardfontsize=20pt, % Set the size of the chessboard pieces
@@ -42,54 +48,249 @@ sottoproblemi e per calcolare il punteggio massimo complessivo in ciascun passag
     showmover=false
 }
 
-\begin{enumerate}
+Dopo aver definito la struttura dati e il contenuto di OPT, manca solo di comprendere come combinare efficacemente i sottoproblemi. 
+Per evitare ridondanze nei dati raccolti in OPT, possiamo generalizzare i vari casi in una matrice $3 \times 3$, considerando che 
+collezionando lo score delle pedine più lontane, rischieremmo di avere valori duplicati poiché sono già inclusi negli OPT più vicini.
+
+Per capire come combinare i sottoproblemi abbiamo analizzato quello che è il principale limite sul posizionamento delle pedine, 
+infatti inizialmente abbiamo pensato alle seguenti combinazioni.
+\newline
+Sia $i$ l'indice della $i-esima$ riga e sia $j$ l'indice della $j-esima$ colonna.\\
+Siano le pedine nere i valori di $OPT$ già calcolati e sia la pedina bianca il valore da aggiungere ad $OPT$ da calcolare.
+
+\subsubsection*{Casi banali}
+
+Per analizzare i casi banali, supponiamo che le soluzioni delle colonne $2$ e $3$ sono state già calcolate, ovvero sono presenti nella matrice $OPT$ e nei vettori $OPT_{MAX}$ e $OPT_{COMB}$.
+
+\begin{itemize}
+    \item {
+    Volendo collezionare lo score della casella $(i, j) = (3, 1)$ in cui è posizionata la pedina bianca, per come è definito il problema, nella collona a destra possiamo collezionare il valore delle celle in cui sono posizionate le pedine nere nelle seguenti posizioni:
+    \newline
+    \begin{enumerate*}[label={}]
+        \item{
+            \chessboard[
+                zero=false, % numbering starts at zero
+                labelbottomformat=\arabic{filelabel},
+                setpieces={Pa3, pb2},
+            ]
+            $OPT[3, 1] = OPT[2, 2] + score[3, 1]$ 
+        }
+        \item{
+            \chessboard[
+                zero=false, % numbering starts at zero
+                labelbottomformat=\arabic{filelabel},
+                setpieces={Pa3, pb1},
+            ]
+            $OPT[3, 1] = OPT[1, 2] + score[3, 1]$ 
+        }
+    \end{enumerate*}
+    }
+    \newpage
+    \item {
+        Volendo collezionare lo score della casella $(i, j) = (2, 1)$ in cui è posizionata la pedina bianca, per come è definito il problema, nella collona a destra possiamo collezionare il valore delle celle in cui sono posizionate le pedine nere nelle seguenti posizioni:
+    \newline
+    \begin{enumerate*}[label={}]   
+        \item{
+            \chessboard[
+                zero=false, % numbering starts at zero
+                labelbottomformat=\arabic{filelabel},
+                setpieces={Pa2, pb1},
+            ]
+            $OPT[2, 1] = OPT[1, 2] + score[2, 1]$ 
+        }
+        \item{
+            \chessboard[
+                zero=false, % numbering starts at zero
+                labelbottomformat=\arabic{filelabel},
+                setpieces={Pa2, pb3},
+            ]
+            $OPT[2, 1] = OPT[3, 2] + score[2, 1]$ 
+        }
+        \item{
+            \chessboard[
+                zero=false, % numbering starts at zero
+                labelbottomformat=\arabic{filelabel},
+                setpieces={Pa2, pb1, pb3},
+            ]
+            $OPT[2, 1] = OPT[1, 2] + OPT_{COMB}[2] + score[2, 1]$ 
+        }
+    \end{enumerate*}
+    }
+
+    \item {
+        Volendo collezionare lo score della casella $(i, j) = (1, 1)$ in cui è posizionata la pedina bianca, per come è definito il problema, nella collona a destra possiamo collezionare il valore delle celle in cui sono posizionate le pedine nere nelle seguenti posizioni:
+    \newline
+    \begin{enumerate*}[label={}]   
+        \item{
+            \chessboard[
+                zero=false, % numbering starts at zero
+                labelbottomformat=\arabic{filelabel},
+                setpieces={Pa1, pb3},
+            ]
+            $OPT[1, 1] = OPT[3, 2] + score[1, 1]$ 
+        }
+        \item{
+            \chessboard[
+                zero=false, % numbering starts at zero
+                labelbottomformat=\arabic{filelabel},
+                setpieces={Pa1, pb2},
+            ]
+            $OPT[1, 1] = OPT[2, 2] + score[1, 1]$ 
+        }
+    \end{enumerate*}
+    }
+\end{itemize}
+
+\subsubsection*{Caso combinato}
+
+Successivamente, abbiamo notato l'esistenza di un'ulteriore caso, che chiameremo \textit{caso combinato}, ovvero il caso in cui andiamo a prendere sia 
+il valore nella riga $i = 1$ che quello nella riga $i = 3$, il cui risultato viene poi salvato all'interno dell'array $OPT_{COMB}[j]$ dove $j$ indica la colonna.
+
+In questo caso vogliamo andare a collezionare lo score delle pedine in posizione $(i, j) = (3, 1)$ e $(1, 1)$.
+
+\chessboard[
+    zero=false, % numbering starts at zero
+    labelbottomformat=\arabic{filelabel},
+    setpieces={Pa1, Pa3, pb2},
+]
+
+$OPT_{COMB}[1] = OPT[2, 2] + score[3, 1] + score[1, 1]$
+
+\subsubsection*{Caso in cui escludiamo una colonna}
+
+Inoltre, analizzando l'istanza data, abbiamo notato la possibilità di dover saltare una colonna $k$, poiché il massimo score possibile 
+può essere ottenuto solo combinando valori incompatibili presenti nelle colonne $k+1$ e $k-1$.
+
+Per ogni cella $(i, 1)$ con $i\in\{1, 2, 3\}$ abbiamo le seguenti casistiche:
+
+\begin{enumerate*}[label={}]   
     \item{
         \chessboard[
             zero=false, % numbering starts at zero
             labelbottomformat=\arabic{filelabel},
-            setpieces={pc3, Pc1},
+            setpieces={Pa3, pc3},
         ]
-        % descrizione
     }
-
     \item{
         \chessboard[
             zero=false, % numbering starts at zero
             labelbottomformat=\arabic{filelabel},
+            setpieces={Pa3, pc2},
         ]
-        % descrizione
     }
-
     \item{
         \chessboard[
             zero=false, % numbering starts at zero
             labelbottomformat=\arabic{filelabel},
+            setpieces={Pa3, pc1},
         ]
-        % descrizione
     }
-
     \item{
         \chessboard[
             zero=false, % numbering starts at zero
             labelbottomformat=\arabic{filelabel},
+            setpieces={Pa3, pc1, pc3},
         ]
-        % descrizione
     }
+\end{enumerate*}
 
+\newpage
+Inoltre bisogna tenere conto anche del caso in cui andiamo a combinare le celle, dunque otteniamo:
+
+\begin{enumerate*}[label={}]   
     \item{
         \chessboard[
             zero=false, % numbering starts at zero
             labelbottomformat=\arabic{filelabel},
+            setpieces={Pa3, Pa1, pc3},
         ]
-        % descrizione
     }
-
     \item{
         \chessboard[
             zero=false, % numbering starts at zero
             labelbottomformat=\arabic{filelabel},
+            setpieces={Pa3, Pa1, pc2},
         ]
-        % descrizione
     }
-\end{enumerate}
+    \item{
+        \chessboard[
+            zero=false, % numbering starts at zero
+            labelbottomformat=\arabic{filelabel},
+            setpieces={Pa3, Pa1, pc1},
+        ]
+    }
+    \item{
+        \chessboard[
+            zero=false, % numbering starts at zero
+            labelbottomformat=\arabic{filelabel},
+            setpieces={Pa3, Pa1, pc1, pc3},
+        ]
+    }
+\end{enumerate*}
 
+Tuttavia, se manteniamo il massimo per ogni colonna in $OPT_{MAX}$, questi casi possono essere semplificati in uno solo, specificato poi nella formula di Bellman.  
+
+Si osserva facilmente che escludere un numero maggiore di colonne non produce alcun guadagno.
+
+\subsubsection*{Numero dei sottoproblemi}
+
+Analizzando così le casistiche possiamo già determinare quale sia il numero di sottoproblemi:
+
+\begin{itemize}
+    \item Per $j = 1$ abbiamo 2 casi banali e il caso in cui si esclude una colonna.
+    \item Per $j = 2$ abbiamo 3 casi banali e il caso in cui si esclude una colonna.
+    \item Per $j = 3$ abbiamo 2 casi banali e il caso in cui si esclude una colonna.
+    \item Per il combinato, abbiamo un caso banale e il caso in cui si esclude una colonna.
+\end{itemize}
+
+Osservando il numero di sottoproblemi per ogni colonna, notiamo che questo è uguale a 12. 
+Moltiplicando questo numero per il numero totale di colonne, otteniamo un totale di sottoproblemi pari a $12n = O(n)$ nella dimensione dell'input. 
+
+\subsection{Formula di Bellman}
+
+\subsubsection*{Caso base}
+
+Il nostro caso base è la colonna $n$ dove non abbiamo bisogno di combinare gli score con altri valori di OPT.
+
+\begin{align*}
+    \begin{cases}
+        OPT[i, n] = score[i, n] \ \ \ \ \ \forall\ i = 1, 2, 3 \\
+        OPT_{COMB}[n] = score[1,n] + score[3,n] \\
+        OPT_{MAX}[n] = \max\{OPT[1,n],\ OPT[2,n],\ OPT[3,n],\ OPT_{COMB}[n]\} \\
+    \end{cases}
+\end{align*}
+
+\subsubsection*{Casi generici}
+
+\begin{align*}
+    \begin{cases}
+        OPT[1, i] = \max\{OPT[2, i + 1],\ OPT[3, i + 1],\ OPT_{MAX}[i + 2]\} + score[1, i] \\
+        OPT[2, i] = \max\{OPT[1, i + 1],\ OPT[3, i + 1],\ OPT_{COMB}[i + 1],\ OPT_{MAX}[i + 2]\} + score[2, i] \\
+        OPT[3, i] = \max\{OPT[1, i + 1],\ OPT[2, i + 1],\ OPT_{MAX}[i + 2]\} + score[3, i] \\
+        OPT_{COMB}[i] = \max\{OPT[2, i + 1],\ OPT_{MAX}[i + 2]\} + score[1, i] + score[3, i] \\
+        OPT_{MAX}[i] = \max\{OPT[1, i],\ OPT[2, i],\ OPT[3, i],\ OPT_{COMB}[i]\} \\
+    \end{cases}
+\end{align*}
+
+\subsection{Pseudocodice}
+
+\begin{algorithm}
+    \caption{compute\_opt(scac)}
+    \begin{algorithmic}[1]
+    \Function{compute\_opt}{scac}
+        \State Matrix $OPT$ $3 \times n$
+        \State Array $OPT_{MAX}[n]$
+        \State Array $OPT_{COMB}[n]$ 
+        \State \Comment{Caso base}
+        \For{$i = 1$ to $3$ do:}
+            \State $OPT[i, n] = score[i, n]$
+        \EndFor
+
+        \State $OPT_{COMB}[n] = score[1,n] + score[3,n]$
+        \State $OPT_{MAX}[n] = \max\{OPT[1,n],\ OPT[2,n],\ OPT[3,n],\ OPT_{COMB}[n]\}$
+        \State \Comment{Fine caso base}
+
+
+    \EndFunction
+    \end{algorithmic}
+\end{algorithm}
