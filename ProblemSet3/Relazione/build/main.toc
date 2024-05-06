@@ -5,3 +5,6 @@
 \contentsline {subsection}{\numberline {2.3}Formula di Bellman}{5}{}%
 \contentsline {subsection}{\numberline {2.4}Pseudocodice}{6}{}%
 \contentsline {section}{\numberline {3}Problema 3}{7}{}%
+\contentsline {subsection}{\numberline {3.1}Definizione dei sottoproblemi}{7}{}%
+\contentsline {subsection}{\numberline {3.2}Combinazione dei sottoproblemi}{7}{}%
+\contentsline {subsection}{\numberline {3.3}Struttura dati}{7}{}%
