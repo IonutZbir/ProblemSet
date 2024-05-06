@@ -1,10 +1,11 @@
-\contentsline {section}{\numberline {1}Problema 1}{2}{}%
-\contentsline {section}{\numberline {2}Problema 2}{3}{}%
-\contentsline {subsection}{\numberline {2.1}Definizione dei sottoproblemi}{3}{}%
-\contentsline {subsection}{\numberline {2.2}Casistiche}{3}{}%
-\contentsline {subsection}{\numberline {2.3}Formula di Bellman}{5}{}%
-\contentsline {subsection}{\numberline {2.4}Pseudocodice}{6}{}%
-\contentsline {section}{\numberline {3}Problema 3}{7}{}%
-\contentsline {subsection}{\numberline {3.1}Definizione dei sottoproblemi}{7}{}%
-\contentsline {subsection}{\numberline {3.2}Combinazione dei sottoproblemi}{7}{}%
-\contentsline {subsection}{\numberline {3.3}Struttura dati}{7}{}%
+\contentsline {section}{\numberline {1}Problema 1}{2}{section.1}%
+\contentsline {section}{\numberline {2}Problema 2}{3}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Definizione dei sottoproblemi}{3}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Casistiche}{3}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Formula di Bellman}{5}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.4}Pseudocodice}{6}{subsection.2.4}%
+\contentsline {section}{\numberline {3}Problema 3}{7}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Definizione dei sottoproblemi}{7}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Struttura dati}{7}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Combinazione dei sottoproblemi}{7}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}Pseudocodice}{8}{subsection.3.4}%
