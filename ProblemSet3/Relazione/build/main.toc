@@ -8,4 +8,5 @@
 \contentsline {subsection}{\numberline {3.1}Definizione dei sottoproblemi}{7}{subsection.3.1}%
 \contentsline {subsection}{\numberline {3.2}Struttura dati}{7}{subsection.3.2}%
 \contentsline {subsection}{\numberline {3.3}Combinazione dei sottoproblemi}{7}{subsection.3.3}%
-\contentsline {subsection}{\numberline {3.4}Pseudocodice}{8}{subsection.3.4}%
+\contentsline {subsection}{\numberline {3.4}Formula di Bellman}{8}{subsection.3.4}%
+\contentsline {subsection}{\numberline {3.5}Pseudocodice}{9}{subsection.3.5}%
