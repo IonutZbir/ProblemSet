@@ -1,14 +1,14 @@
-\section{Problema 3}
+\section{Problema 3 \textit{(Costruire un albero di costo minimo)}}
 
 \subsection{Definizione dei sottoproblemi}
 
-Nella risoluzione del problema, abbiamo focalizzato il nostro ragionamento sulla proprietà fondamentale che deve avere un albero per
+Nella risoluzione del problema, abbiamo focalizzato il nostro ragionamento sulle proprietà fondamentale che deve avere un albero per
 essere accettabile, ovvero:
-\begin{itemize}
+\begin{enumerate}
 	\item Il costo complessivo dell'albero deve essere minimo.
 	\item Ogni nodo interno deve avere esattamente due figli.
 	\item L'albero ha  esattamente $n$ foglie.
-\end{itemize}
+\end{enumerate}
 
 \begin{center}
 	\textbf{$OPT[i, j]$ rappresenta l'albero di costo minimo contenente le foglie $\{C[j], C[j + 1], ..., C[j + i - 1]\}$ date in input, 
@@ -28,7 +28,7 @@ Abbiamo definito una matrice $OPT$ di dimensioni $n \times n$, dove ogni cella c
 
 Tuttavia, è importante notare che utilizziamo solo la metà delle celle di $OPT$. In particolare,
 ci limitiamo alla matrice triangolare superiore sinistra, poiché oltre questa 
-zona andremmo oltre il numero di foglie salvate nell'array $C$, che contiene i valori delle foglie dati in input.
+zona andremmo oltre il numero di foglie salvate nell'array $C$, contenente i valori delle foglie dati in input.
 
 \subsection{Combinazione dei sottoproblemi}
 
@@ -42,12 +42,12 @@ Durante l'analisi dei casi base, abbiamo individuato due situazioni:
 
 \begin{itemize}
 	\item {
-		Il primo caso base riguarda la prima riga della matrice, che rappresenta una foglia singola. In questo caso, assegniamo il valore della foglia a $OPT[1, j].max$, 
+		Il primo caso base riguarda la prima riga della matrice, dove ogni cella rappresenta una foglia singola. In questo caso, assegniamo il valore della foglia a $OPT[1, j].max$, 
 		mentre poniamo il valore di $OPT[1, j].val = 0$ (poiché per la nostra definizione le foglie non hanno valore). $OPT[1, j].sin$ e $OPT[1, j].des$ non vengono inizializzate in quanto 
 		non ci sono sottoalberi.
 	}
 	\item {
-		Il secondo caso base si riferisce alla seconda riga della matrice, che rappresenta un albero con solo due foglie. Questo albero può essere combinato in un 
+		Il secondo caso base si riferisce alla seconda riga della matrice, dove ogni cella rappresenta un albero con solo due foglie. Questo albero può essere combinato in un 
 		unico modo, poiché le foglie devono essere ordinate secondo una visita simmetrica rispetto all'input. In questo caso, il valore di $OPT[2, j].val$ è il prodotto tra 
 		gli $OPT[1, j].max$ e $OPT[1, j + 1].max$ i quali indicano le foglie, mentre $OPT[2, j].max$ rappresenta il massimo tra i due valori delle foglie. Inoltre, assegniamo gli indici delle foglie a $OPT[2, j].sin$ e $OPT[2, j].des$ 
 		per poter trovare facilmente le loro posizioni nella matrice.
@@ -62,12 +62,18 @@ cercare un indice $k$ nell'intervallo $[1 : i - 1]$ tale che il nodo risultante 
 sottoalbero destro contenente le foglie da $j + k +1$ a $j + i - 1$ sia il più piccolo possibile in termini di costo.
 
 \newpage
+\subsubsection*{Numero dei sottoproblemi}
+
+Per come sono stati definiti i sottoproblemi, ciascun sottoproblema corrisponde ad una cella della matrice triangolare superiore sinistra. A tal proposito 
+il numero di sottoproblemi è $\frac{n^2}{2} = O(n^2)$. 
+
 \subsubsection*{Goal}
 
-Il valore dell'albero minimo che stiamo cercando si trova all'interno della cella $OPT[n,1].val$. 
+Il valore dell'albero minimo che stiamo cercando si trova all'interno della cella $OPT[n,1].val$.\\
 Questa cella contiene il valore dell'albero minimo che include tutte le foglie che vanno da 
 $C[1]$ a $C[n]$ (essendo $i = 1$ e $j = n$). 
 Poiché questo albero contiene tutte le foglie, è l'albero di costo minimo che stiamo cercando.
+
 
 \subsection{Formula di Bellman}
 
@@ -99,7 +105,7 @@ Poiché questo albero contiene tutte le foglie, è l'albero di costo minimo che 
 \subsubsection*{Caso generico}
 
 $$
-OPT[i, j].val = \min_{1 \leq k \leq i - 1}\{(OPT[i - k, j].max \times OPT[k, i - k + j].max) + 											OPT[i - k, j].val + OPT[k, i - k + j].val\}
+OPT[i, j].val = \min_{k = 1,\ \dots,\ i - 1}\{(OPT[k, j].max \times OPT[i - k, j + k].max) + OPT[k, j].val + OPT[i - k, j + k].val\}
 $$
 
 Dopo aver trovato il $k$ che minimizza la formula sopra, calcoliamo i restanti 3 campi di $OPT[i, j]$
@@ -107,9 +113,9 @@ Dopo aver trovato il $k$ che minimizza la formula sopra, calcoliamo i restanti 3
 \begin{align*}
 	OPT[i, j]	
 	\begin{cases}                                                                                          
-		.max = \max\{(OPT[i - k, j].max, OPT[k, i - k + j].max)\}\\
-		.sin = (i - k, j)\\
-		.des = (k, i - k + j)\\
+		.max = \max\{(OPT[k, j].max, OPT[i - k, j + k].max)\}\\
+		.sin = (k, j)\\
+		.des = (i - k, j + k)\\
 	\end{cases}                                                                                            
 \end{align*}
 
@@ -156,7 +162,7 @@ dove $i = 3$, i possibili valori per $k$ sono $1$ e $2$.
 	}
 	\newline
 	\item{
-	      In questo caso il nostro $k = 1$ e di conseguenza, il costo totale dell'albero è 42
+	      Con $k = 1$ dobbiamo combinare i valori contenuti in $OPT[1,1]$ e $OPT[2,2]$, portando così il costo dell'allbero a 42
 	}
 \end{enumerate*}
 \end{center}
@@ -182,7 +188,7 @@ dove $i = 3$, i possibili valori per $k$ sono $1$ e $2$.
 	}
 	\newline
 	\item{
-	      In questo caso il nostro $k = 2$ e di conseguenza, il costo totale dell'albero è 36, che è minimo.
+		Con $k = 2$ dobbiamo combinare i valori contenuti in $OPT[2,1]$ e $OPT[1,3]$, portando così il costo dell'allbero a 36
 	}
 \end{enumerate*}
 \end{center}
@@ -197,5 +203,128 @@ dove $i = 3$, i possibili valori per $k$ sono $1$ e $2$.
 \]
 
 
-
 \subsection{Pseudocodice}
+
+
+\begin{algorithm}
+	\caption{Algoritmo\_Albero}
+	\begin{algorithmic}[1]
+		\Function{compute\_opt}{C[1: n]}
+		\State \textbf{Matrix} $OPT[n, n]$ 
+		\State \Comment{Caso base, $i = 1$}
+		\For{$j = 1$ \textbf{to} $n$}
+		\State $OPT[1, j].val = 0$
+		\State $OPT[1, j].max = C[j]$
+		\State $OPT[1, j].sin = NULL$
+		\State $OPT[1, j].des = NULL$
+		\EndFor
+
+		\State \Comment{Caso base, $i = 2$}
+
+		\If{$n >= 2$}
+		\For{$j = 1$ \textbf{to} $n$}
+		\State $OPT[2, j].val = OPT[i - 1, j].max \times OPT[i - 1, j + 1].max$
+		\State $OPT[2, j].max = \max\{OPT[i - 1, j].max, OPT[i - 1, j + 1].max\}$
+		\State $OPT[2, j].sin = (i - 1, j)$
+		\State $OPT[2, j].des = (i - 1, j + 1)$
+		\EndFor
+		\EndIf
+		\State \Comment{Fine casi base}
+
+		\State \Comment{Casi Generici}
+		\If{$n >= 3$}
+		\For{$i = 1$ \textbf{to} $n$}
+		\For{$j = 1$ \textbf{to} $n - i + 1$}
+		\State $OPT[i, j].val = \min_{k = 1,\ \dots,\ i - 1}\{(OPT[k, j].max \times OPT[i - k, j + k].max) + OPT[k, j].val + OPT[i - k, j + k].val\}$
+		\State Salviamo il $k$ che minimizza $OPT[i, j].val$
+		\State $OPT[i, j].max = \max\{(OPT[k, j].max, OPT[i - k, j + k].max)\}$
+		\State $OPT[i, j].sin = (k, j)$
+		\State $OPT[i, j].des = (i - k, j + k)$
+		\EndFor
+		\EndFor
+		\EndIf
+		
+		\Return $OPT[n, 1].val$
+		\EndFunction
+	\end{algorithmic}
+\end{algorithm}
+
+\subsubsection*{Analisi della complessità}
+
+\begin{itemize}
+	\item{
+		Il tempo di esecuzione dell'algoritmo è una diretta conseguenza del numero dei sottoproblemi. Infatti avendo $O(n^2)$ sottoproblemi,
+		ciascuno risolvibile in tempo $O(k)$, segue che l'algoritmo trova la soluzione ottima in tempo $O(n^2 \times k)$, dove $k = O(n)$. 
+		In conlusione il tempo di esecuzione è $O(n^3)$.\\
+		Siamo consapevoli che la complessità temporale di questo algoritmo non sia ottimale.
+	}
+	\item{
+		Per quanto riguarda lo spazio utilizzato, usando la tecnica tabulation, in memoria salviamo una matrice $n \times n$ dove ciascuna cella contiene 4 valori.
+		Di conseguenza, l'algoritmo calcola la soluzione ottima in spazio $4n^2 = O(n^2)$.
+	}
+\end{itemize}
+
+\subsection{Ricostruzione dell'albero}
+
+Per quanto concerne la ricostruzione dell'albero, a partire dalla matrice $OPT$, in tempo lineare nel numero di nodi dell'albero possiamo ricostruire l'albero nel seguente modo:
+
+\begin{itemize}
+	\item Partiamo dalla cella $OPT[n, 1]$, che contiene la radice dell'albero, in quanto contiene la somma dei valori dei nodi interni dell'albero.
+	\item {
+		Il valore di ciascun nodo lo ricaviamo guardando le coppie degli indici $.sin$ e $.des$.\\
+		Definiamo $sin_{i,j} = OPT[i, j].sin$ e $des_{i,j} = OPT[i, j].des$.\\
+		Dunque, il valore della radice è:\\
+		$root = OPT[n, 1].val - (OPT[sin_{n,1}].val + OPT[des_{n, 1}].val)$
+		}
+	\item {
+		In generale, per un nodo $x_{i,j}$, $val(x_{i,j}) = OPT[i, j].val - (OPT[sin_{i,j}].val + OPT[des_{i,j}.val])$
+	}
+\end{itemize}
+
+Per comodità, assumiamo $sin = (sin_{0},\ sin_{1})$ e $des = (des_{0},\ des_{1})$, quindi
+$$
+OPT[sin] = OPT[sin_{0},\ sin_{1}]
+$$
+$$
+OPT[des] = OPT[des_{0},\ des_{1}]
+$$ 
+
+\begin{algorithm}
+	\caption{RicostruzioneAlbero(OPT)}
+	\begin{algorithmic}[1]
+		\Function{RicostruzioneAlbero}{OPT}
+		\State $T \gets$ albero vuoto
+		\State $sin \gets OPT[n, 1].sin$
+		\State $des \gets OPT[n, 1].des$
+		\\
+		\If{$sin = NULL$ \textbf{and} $des = NULL$} \Comment{foglia}
+		\State $T.root \gets OPT[i, j].max$
+		\State \Return $T$
+		\EndIf
+		\\
+		\State $T.root \gets OPT[n, 1].val - (OPT[sin].val + OPT[des].val)$
+		\State \Call{RicostruzioneAlberoRicorsivo}{OPT, T, sin[0], sin[1], root}
+		\State \Call{RicostruzioneAlberoRicorsivo}{OPT, T, des[0], des[1], root}
+		\\
+		\State \Return $T$
+	\EndFunction
+\\
+\\
+	\Function{RicostruzioneAlberoRicorsivo}{OPT, T, i, j, parent}
+	\State $sin \gets OPT[i, j].sin$
+	\State $des \gets OPT[i, j].des$
+	\\
+	\If{$sin = NULL$ \textbf{and} $des = NULL$} \Comment{foglia}
+	\State $val \gets OPT[i, j].max$
+	\State \Return
+	\EndIf
+	\\
+	\State $v.val \gets OPT[i, j].val - (OPT[sin].val + OPT[des].val)$
+	\State rendi $v$ figlio di $parent$ in $T$
+	\\
+	\State \Call{RicostruzioneAlberoRicorsivo}{OPT, T, sin[0], sin[1], v}
+	\State \Call{RicostruzioneAlberoRicorsivo}{OPT, T, des[0], des[1], v}
+	\EndFunction
+
+\end{algorithmic}
+\end{algorithm}

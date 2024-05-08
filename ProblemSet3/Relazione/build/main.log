@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024/Arch Linux) (preloaded format=pdflatex 2024.4.30)  7 MAY 2024 15:31
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024/Arch Linux) (preloaded format=pdflatex 2024.4.30)  8 MAY 2024 18:29
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -578,7 +578,7 @@ Package hyperref Info: Option `colorlinks' set `true' on input line 20.
 File: l3backend-pdftex.def 2024-02-20 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count342
 \l__pdf_internal_box=\box67
-) (build/main.aux (build/pb1.aux) (build/pb2.aux) (build/pb3.aux))
+) (build/main.aux (build/pb2.aux) (build/pb3.aux))
 \openout1 = `main.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 28.
@@ -691,15 +691,15 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
  [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}{/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}]
-\openout2 = `pb1.aux'.
-
- (./pb1.tex) [2
-
-]
 \openout2 = `pb2.aux'.
 
  (./pb2.tex
 Underfull \hbox (badness 10000) in paragraph at lines 5--9
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 54--60
 
  []
 
@@ -721,9 +721,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 67--88
 
  []
 
-[3
-
-
+[2
 
 {/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}]
 Overfull \hbox (18.16254pt too wide) in paragraph at lines 90--119
@@ -740,21 +738,21 @@ Underfull \hbox (badness 10000) in paragraph at lines 121--142
 
  []
 
-[4] [5]
-Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on input line 287.
-) [6]
+[3] [4]
+Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on input line 288.
+) [5]
 \openout2 = `pb3.aux'.
 
- (./pb3.tex [7
+ (./pb3.tex [6
 
 
 
 ]
-Overfull \hbox (44.61978pt too wide) in paragraph at lines 122--124
+Overfull \hbox (44.61978pt too wide) in paragraph at lines 128--130
 []\T1/cmr/m/n/10 Ogni cella della ma-trice con-tiene 4 val-ori, dunque pos-si-amo cod-i-fi-care questi 4 val-ori come il seguente ar-ray: $\OT1/cmr/m/n/10 [\OML/cmm/m/it/10 :val; :max; :sin; :des\OT1/cmr/m/n/10 ]$\T1/cmr/m/n/10 . 
  []
 
-[8]) [9] (build/main.aux (build/pb1.aux) (build/pb2.aux) (build/pb3.aux))
+[7] [8]) [9] (build/main.aux (build/pb2.aux) (build/pb3.aux))
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-02-20>
@@ -764,21 +762,21 @@ L3 programming layer <2024-02-20>
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 7FE2DA44358A2D124C6B02DD8AD009C1;1697.
+(rerunfilecheck)             Checksum: C0AC34BA582FF508E847C09A9D514F6F;2199.
  ) 
 Here is how much of TeX's memory you used:
- 26225 strings out of 476076
- 477694 string characters out of 5793775
+ 26228 strings out of 476076
+ 477618 string characters out of 5793775
  1967187 words of memory out of 5000000
  47802 multiletter control sequences out of 15000+600000
- 573487 words of font info for 76 fonts, out of 8000000 for 9000
+ 574889 words of font info for 78 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  99i,14n,107p,769b,1203s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/share/texmf-dist/fonts/type1/public/skaknew/SkakNew-Diagram.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1000.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfcc1000.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm0800.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1728.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfss1000.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfti1000.pfb>
-Output written on build/main.pdf (9 pages, 263831 bytes).
+</usr/share/texmf-dist/fonts/type1/public/skaknew/SkakNew-Diagram.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbi1000.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbi1440.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1000.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfcc1000.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm0800.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1728.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfss1000.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfti1000.pfb>
+Output written on build/main.pdf (9 pages, 318321 bytes).
 PDF statistics:
- 269 PDF objects out of 1000 (max. 8388607)
- 218 compressed objects within 3 object streams
- 59 named destinations out of 1000 (max. 500000)
+ 294 PDF objects out of 1000 (max. 8388607)
+ 237 compressed objects within 3 object streams
+ 67 named destinations out of 1000 (max. 500000)
  109 words of extra memory for PDF output out of 10000 (max. 10000000)
 
