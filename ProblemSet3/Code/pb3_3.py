@@ -1,6 +1,5 @@
 import pprint as pp
 
-
 def compute_opt(L):
     n = len(L)
     M = [[0] * (n) for _ in range(n)]
@@ -75,7 +74,6 @@ class Tree:
         
         return self
 
-
     def create_tree_recursive(self, OPT, root, i, j):
         sin = OPT[i][j][2]
         des = OPT[i][j][3]
@@ -103,7 +101,7 @@ class Tree:
         for child in node.children:
             self.print_tree(child, depth + 1)
 
-C = [1, 3, 4, 3, 2]
+C = [1, 3, 4, 3, 2, 2, 3, 4, 5, 6, 2, 1, 2, 3]
 M, OPT = compute_opt(C)
 tree = Tree().create_tree(M, len(C))
 
@@ -115,12 +113,6 @@ c = tree.root
     
 tree.print_tree(tree.root)
 
-[   [[0 , 1, None, None],     [0 , 3, None, None],     [0, 4, None, None],      [0, 3, None, None],     [0, 2, None, None]],
-    [[3 , 3, (0, 0), (0, 1)], [12, 4, (0, 1), (0, 2)], [12, 4, (0, 2), (0, 3)], [6, 3, (0, 3), (0, 4)], 0],
-    [[15, 4, (1, 0), (0, 2)], [24, 4, (0, 1), (1, 2)], [18, 4, (0, 2), (1, 3)], 0,                      0],
-    [[27, 4, (1, 0), (1, 2)], [30, 4, (0, 1), (2, 2)], 0 ,                      0,                      0],
-    [[33, 4, (1, 0), (2, 2)], 0,                       0,                       0,                      0]
-]
 
 
 

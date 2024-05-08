@@ -264,6 +264,13 @@ dove $i = 3$, i possibili valori per $k$ sono $1$ e $2$.
 	}
 \end{itemize}
 
+\subsubsection*{Correttezza}
+
+L'algoritmo è corretto poiché utilizza la formula di Bellman per combinare sottoalberi di valore minimo, 
+garantendo così la costruzione di un albero complessivo con il costo minimo. Questo approccio si basa sulla proprietà 
+della formula di Bellman di trovare la soluzione ottimale per ogni sottostruttura del problema, consentendo di aggregare 
+in modo efficace i sottoalberi con il costo minore e di costruire progressivamente l'albero di costo minimo.
+
 \subsection{Ricostruzione dell'albero}
 
 Per quanto concerne la ricostruzione dell'albero, a partire dalla matrice $OPT$, in tempo lineare nel numero di nodi dell'albero possiamo ricostruire l'albero nel seguente modo:
